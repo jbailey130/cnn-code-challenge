@@ -1,0 +1,29 @@
+<!--
+    USING THE ANGULAR MATERIAL STYLING
+-->
+<div ng-cloak >
+    <md-content class="md-padding" layout-xs="column" layout="row">
+        <div ng-repeat="tweetRow in tweets" flex-xs flex-gt-xs="25" layout="column">
+            <md-card ng-repeat="tweet in tweetRow" md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline">
+                            {{tweet.user.name}}
+                        </span>
+                        <span class="md-subhead" ng-bind-html="(tweet.text | removelinks | hasgtagit )">
+                        </span>
+                    </md-card-title-text>
+                    <md-card-title-media>
+                        <div class="md-media-sm card-media">
+                            <img ng-src="{{tweet.user.profile_image_url}}" />
+                        </div>
+                    </md-card-title-media>
+                </md-card-title>
+                <md-card-actions layout="row" layout-align="end center">
+                    <md-button ng-click="go( ( tweet.text | articlelink: true  ) )">View Article</md-button>
+                    <md-button ng-click="go( ( tweet.text | articlelink: false  ) )">View Tweet</md-button>
+                </md-card-actions>
+            </md-card>
+        </div>
+    </md-content>
+</div>
