@@ -14,7 +14,7 @@ angular.module('cnnFilters', ['ngSanitize'])
             return result;
         }
     })
-    .filter('hasgtagit', function($sce) {
+    .filter('hasgtagit', function() {
         //  THIS HIGHLIGHTS ANY HASTAGS
         return function(text) {
             var exp =/\S*#(?:\[[^\]]+\]|\S+)/g;
@@ -24,10 +24,26 @@ angular.module('cnnFilters', ['ngSanitize'])
             //  HAVE TO CHANGE THE STATE TO USE A QUERYSTRING INSTEAD
             if(matches){
                 for(var i = 0; i < matches.length; i++){
-                    text = text.replace(matches[i],'<a href="hashtags?tag=' + matches[i].replace('#', '') + '">hashtags</a>');
+                    text = text.replace(matches[i],'<a href="hashtags?tags=' + matches[i].replace('#', '') + '">hashtags</a>');
                 }
             }
-            return $sce.trustAsHtml(text);
+            return text;
+        }
+    })
+    .filter('atnameit', function() {
+        //  THIS HIGHLIGHTS ANY HASTAGS
+        return function(text) {
+            var exp =/\S*@(?:\[[^\]]+\]|\S+)/g;
+            var matches = text.match(exp);
+
+            //  CANNOT USE UI-SREF IN SIDE A FILTER WHEN CALLED FROM A DIRECTIVE
+            //  HAVE TO CHANGE THE STATE TO USE A QUERYSTRING INSTEAD
+            if(matches){
+                for(var i = 0; i < matches.length; i++){
+                    text = text.replace(matches[i],'<a href="names?name=' + matches[i].replace('#', '') + '">hashtags</a>');
+                }
+            }
+            return text;
         }
     })
     .filter('removelinks', function() {

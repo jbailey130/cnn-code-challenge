@@ -4,7 +4,7 @@ angular.module('cnnApp')
   .config(function ($stateProvider) {
     $stateProvider
       .state('hashtags', {
-        url: '/hashtags?tag',
+        url: '/hashtags?tags',
         templateUrl: 'app/hashtags/hashtags.html',
         controller: 'HashtagCtrl'
     });

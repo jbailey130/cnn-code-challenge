@@ -10,7 +10,7 @@
                         <span class="md-headline">
                             {{tweet.user.name}}
                         </span>
-                        <span class="md-subhead" ng-bind-html="(tweet.text | removelinks | hasgtagit )">
+                        <span class="md-subhead" ng-bind-html="tweet.text">
                         </span>
                     </md-card-title-text>
                     <md-card-title-media>
@@ -20,8 +20,8 @@
                     </md-card-title-media>
                 </md-card-title>
                 <md-card-actions layout="row" layout-align="end center">
-                    <md-button ng-click="go( ( tweet.text | articlelink: true  ) )">View Article</md-button>
-                    <md-button ng-click="go( ( tweet.text | articlelink: false  ) )">View Tweet</md-button>
+                    <md-button ng-show="tweet.article_link" ng-click="go( tweet.article_link  )">View Article</md-button>
+                    <md-button ng-show="tweet.tweet_link" ng-click="go( ( tweet.tweet_link  ) )">View Tweet</md-button>
                 </md-card-actions>
             </md-card>
         </div>
